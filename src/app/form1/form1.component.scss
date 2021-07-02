@@ -1,0 +1,25 @@
+@mixin commonText {
+  font-size: 50px;
+}
+.main-container {
+  display: inline-flex;
+  h2 {
+    color: aqua;
+    &:hover {
+      color: black;
+    }
+    &::after {
+      content: "paad";
+    }
+  }
+  p {
+    @include commonText;
+  }
+}
+$bgColor: #ff3a00;
+
+.inner-item {
+  padding: 100px - 80px;
+  flex: 10%;
+  background-color: $bgColor;
+}

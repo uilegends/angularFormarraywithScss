@@ -1,0 +1,43 @@
+<div class="main-container">
+    <h2>My Custom Form</h2>
+    <p>Form uses many</p>
+    <form [formGroup]="profileFormGroup" (ngSubmit)="formSubmit()">
+        <div class="inner-item">
+            <mat-form-field>
+                <mat-label>Username</mat-label>
+                <input matInput formControlName="username">
+            </mat-form-field>
+            <span *ngIf="formStatus && profile.username.errors">
+                <span *ngIf="profile.username.errors.required">First Name is required</span>
+            </span>
+        </div>
+        <div class="inner-item">
+            <mat-form-field>
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email">
+            </mat-form-field>
+            <span *ngIf="formStatus && profile.email.errors">
+                <span *ngIf="profile.email.errors.required">Email is required</span>
+            </span>
+        </div>
+        <div formArrayName="address" *ngFor="let item of address.controls;let i= index">
+            <div [formGroupName]="i">
+                <input formControlName="city">
+                <p *ngIf="formStatus && address.controls[i].get('city').errors?.required">
+                    City is required
+                </p>
+                <input formControlName="country" placeholder="Country Name">
+                <p *ngIf="formStatus && address.controls[i].get('country').errors?.required">
+                    Country is required
+                </p>
+                <p>
+                    <span (click)="removeAddress(i)">Remove Address</span>
+                </p>
+            </div>
+        </div>
+        <div><button (click)="addAddress()">+Add Address</button></div>
+        <p>
+            <button type="submit">Submit</button>
+        </p>
+    </form>
+</div>
